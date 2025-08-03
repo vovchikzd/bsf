@@ -7,6 +7,11 @@ pub fn build(b: *std.Build) void {
         .target = b.graph.host,
     });
 
+    const base64_mod = b.addModule("base64", .{
+        .root_source_file = b.path("src/base64.zig")
+    });
+    exe.root_module.addImport("base64", base64_mod);
+
     b.installArtifact(exe);
 
     const run_exe = b.addRunArtifact(exe);
